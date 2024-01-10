@@ -1,2 +1,2 @@
-# BCYrpt-demo
+# BCrypt-demo
 BCrypt Demoproject für KT-Netze
