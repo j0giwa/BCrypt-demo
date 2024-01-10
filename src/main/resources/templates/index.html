@@ -11,6 +11,8 @@
 			Password: <input type="text" name="password">
 			<input type="submit">
 		</form>
-		<div th:text="${user}">USERNAME</div>
+		<div th:if="${user != null}">
+			Logged in as: <span th:text="${user}">USERNAME</span>
+		</div>
 	</body>
 </html>
