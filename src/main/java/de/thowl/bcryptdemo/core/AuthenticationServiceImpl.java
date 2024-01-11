@@ -21,18 +21,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public String login(String email, String password){
         log.debug("entering login");
+        log.info("Login attempt with E-Mail: {}", email);
 
         User usr = this.repo.findByEmail(email);
         if (null == usr) {
             // User not registert
+            log.error("E-Mail: {} does not exitst", email);
             return null;
         }
 
+        log.info("Comparing Form-password with BCrypt-hash");
         String dbpasswd = usr.getPassword();
-        log.info("db-passwd {}", dbpasswd);
+        log.debug("BCrypt-hash: {}", dbpasswd);
 
         if (encoder.matches(password, dbpasswd))
-            log.info("Password matched");
+            log.info("Password matched, login successfull");
 
         return usr.getUsername();
     }
