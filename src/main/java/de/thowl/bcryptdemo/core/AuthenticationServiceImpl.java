@@ -34,11 +34,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String dbpasswd = usr.getPassword();
         log.debug("BCrypt-hash: {}", dbpasswd);
 
-        if (encoder.matches(password, dbpasswd)) {
-            log.info("Password matched, login successfull");
-            return usr.getUsername();
+        if (!encoder.matches(password, dbpasswd)) {
+            log.info("Password did not match, login failed");
+            return null;
         }
-    
-        return null;
+
+        log.info("Password matched, login successfull");
+        return usr.getUsername();
     }
 }
